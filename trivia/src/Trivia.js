@@ -9,12 +9,30 @@ export default function Trivia() {
     useEffect(() => {
         generateQuestions(setQuestions);
     }, []);
+
+    //==================================================
+
+    let numQuestions;
+    let category;
+
+    function GetNumQuestions(selectedNumQuestions) {
+        numQuestions = selectedNumQuestions;
+        console.log(numQuestions);
+    }
+
+    function GetCategory(selectedCategory) {
+        category = selectedCategory;
+        console.log(category);
+    }
+
+    //===================================================
+
     return(
         <>
             <h2>Questions:</h2>
-            <QuestionsDropdown/>
+            <QuestionsDropdown handleGetNumQuestions={GetNumQuestions}/>
             <h2>Category:</h2>
-            <CategoryDropdown/>
+            <CategoryDropdown handleGetCategory={GetCategory}/>
             <Button variant="contained">Start</Button>
         </>
     );

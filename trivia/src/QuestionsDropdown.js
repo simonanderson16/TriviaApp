@@ -1,6 +1,12 @@
-export default function QuestionsDropdown() {
+import { useState } from "react";
+
+export default function QuestionsDropdown(props) {
+    const [currentNum, setCurrentNum] = useState("0");
+    //console.log(currentNum);
     return (
-        <select>
+        <>
+        {props.handleGetNumQuestions(currentNum)}
+        <select value={currentNum} onChange={e => setCurrentNum(e.target.value)}>
             <option value="0">0</option>
             <option value="1">1</option>
             <option value="2">2</option>
@@ -13,5 +19,6 @@ export default function QuestionsDropdown() {
             <option value="9">9</option>
             <option value="10">10</option>
         </select>
+        </>
     );
 }

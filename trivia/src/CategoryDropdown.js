@@ -1,6 +1,12 @@
-export default function QuestionsDropdown() {
+import { useState } from "react";
+
+export default function CategoryDropdown(props) {
+    const [currentCategory, setCurrentCategory] = useState("");
+    //console.log(currentCategory);
     return (
-        <select>
+        <>
+        {props.handleGetCategory(currentCategory)}
+        <select value={currentCategory} onChange={e => setCurrentCategory(e.target.value)}>
             <option value="">Any Category</option>
             <option value="9">General Knowledge</option>
             <option value="10">Entertainment: Books</option>
@@ -27,5 +33,6 @@ export default function QuestionsDropdown() {
             <option value="31">Entertainment: Japanese Anime & Manga</option>
             <option value="32">Entertainment: Cartoon & Animation</option>
         </select>
+        </>
     );
 }
