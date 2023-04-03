@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import QuestionsDropdown from "./QuestionsDropdown";
 import CategoryDropdown from "./CategoryDropdown";
 import Button from '@mui/material/Button';
+import Question from "./Question";
 
 export default function Trivia() {
     const[questions, setQuestions] = useState([]);
@@ -58,6 +59,7 @@ export default function Trivia() {
             <h2>Category:</h2>
             <CategoryDropdown handleGetCategory={GetCategory}/>
             <Button variant="contained" onClick={() => generateQuestions(setQuestions)}>Start</Button>
+            {questions.map((info, index) => <Question key={index} question={info} number={index+1}/>)}
         </>
     );
 }
