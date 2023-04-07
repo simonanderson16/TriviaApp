@@ -6,6 +6,9 @@ import Question from "./Question";
 import "./styles.css"
 
 export default function Trivia() {
+    
+    const [totalCorrect, SetTotalCorrect] = useState(0);
+    
     const[questions, setQuestions] = useState([]);
     console.log(questions);
     useEffect(() => {
@@ -60,7 +63,7 @@ export default function Trivia() {
             <h2>Category:</h2>
             <CategoryDropdown handleGetCategory={GetCategory}/>
             <Button variant="contained" className="start-button" onClick={() => generateQuestions(setQuestions)}>Start</Button>
-            {questions.map((info, index) => <Question key={index} question={info} number={index+1}/>)}
+            {questions.map((info, index) => <Question key={index} question={info} number={index+1} totalCorrect={totalCorrect} handleCorrect={SetTotalCorrect}/>)}
         </div>
     );
 }

@@ -1,24 +1,38 @@
+import { useState, useEffect } from "react";
 import AnswerChoice from "./AnswerChoice";
 import "./styles.css"
 
-export default function Question({question, number}) {
+export default function Question({question, number, totalCorrect, handleCorrect}) {
+
+    //const [totalCorrect, SetTotalCorrect] = useState(0);
+
 
     const getFormattedQuestionText = (string) => {
         const stringWithQuotes = string.replaceAll("&quot;", "\"");
         const stringWithApostrophes = stringWithQuotes.replaceAll("&#039;", "'");
         const stringWithAccents = stringWithApostrophes.replaceAll("&eacute;", "é");
+        const stringWithPi = stringWithAccents.replaceAll("&pi;", "π");
 
-        return stringWithAccents;
+        return stringWithPi;
     }
 
-    let answerChoices;
-    const randomizeOrderOfAnswerChoices = (question) => {
-        answerChoices = [...question.incorrect_answers, question.correct_answer];
-        //console.log("incorrect answers: " + answerChoices);
-        //answerChoices.push(question.correct_answer);
-        shuffleArray(answerChoices);
+    // let answerChoices;
+    // const randomizeOrderOfAnswerChoices = (question) => {
+    //     answerChoices = [...question.incorrect_answers, question.correct_answer];
+    //     //console.log("incorrect answers: " + answerChoices);
+    //     //answerChoices.push(question.correct_answer);
+    //     shuffleArray(answerChoices);
+    // }
 
-    }
+    // let answerChoices = [...question.incorrect_answers, question.correct_answer];
+    // shuffleArray(answerChoices);
+
+    const [answerChoices, setAnswerChoices] = useState([]);
+    useEffect(() => {
+        const shuffledChoices = [...question.incorrect_answers, question.correct_answer];
+        shuffleArray(shuffledChoices);
+        setAnswerChoices(shuffledChoices);
+    }, [question]);
 
     function shuffleArray(array) {
         for (let i = array.length - 1; i > 0; i--) {
@@ -31,12 +45,13 @@ export default function Question({question, number}) {
 
     return (
         <div className="whole_question">
-            <h3>Question {number}</h3>
+            <h3 style={{color: "purple"}}>Question {number}</h3>
             <p>{/*JSON.stringify(question.question)*/}</p>
-            <p>{getFormattedQuestionText((question.question))}</p>
+            <p className="question-text" style={{fontWeight: 'bold'}}>{getFormattedQuestionText((question.question))}</p>
             {/*question.map(q => <AnswerChoice>{q.correct_answer}</AnswerChoice>)*/}
-            {randomizeOrderOfAnswerChoices(question)}
-            {answerChoices.map(item => <AnswerChoice allAnswers={item} correctAnswer={question.correct_answer}/>)}
+            {/*randomizeOrderOfAnswerChoices(question)*/}
+            {answerChoices.map(item => <AnswerChoice singleAnswer={item} correctAnswer={question.correct_answer} currentCorrect={totalCorrect} handleCorrectAnswer={handleCorrect}/>)}
+            <p style={{marginTop: "20px"}}>Total Correct: {totalCorrect}</p>
         </div>
     );
 
