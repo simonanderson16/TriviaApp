@@ -6,14 +6,17 @@ export default function Question({question, number, totalCorrect, handleCorrect}
 
     //const [totalCorrect, SetTotalCorrect] = useState(0);
 
+    const [hasBeenAnswered, setHasBeenAnswered] = useState(false);
+
 
     const getFormattedString = (string) => {
         const stringWithQuotes = string.replaceAll("&quot;", "\"");
         const stringWithApostrophes = stringWithQuotes.replaceAll("&#039;", "'");
         const stringWithAccents = stringWithApostrophes.replaceAll("&eacute;", "é");
         const stringWithPi = stringWithAccents.replaceAll("&pi;", "π");
+        const stringWithAnd =stringWithPi.replaceAll("&amp;", "&");
 
-        return stringWithPi;
+        return stringWithAnd;
     }
 
     // let answerChoices;
@@ -50,7 +53,7 @@ export default function Question({question, number, totalCorrect, handleCorrect}
             <p className="question-text" style={{fontWeight: 'bold'}}>{getFormattedString((question.question))}</p>
             {/*question.map(q => <AnswerChoice>{q.correct_answer}</AnswerChoice>)*/}
             {/*randomizeOrderOfAnswerChoices(question)*/}
-            {answerChoices.map(item => <AnswerChoice singleAnswer={getFormattedString(item)} correctAnswer={question.correct_answer} currentCorrect={totalCorrect} handleCorrectAnswer={handleCorrect}/>)}
+            {answerChoices.map(item => <AnswerChoice singleAnswer={getFormattedString(item)} correctAnswer={question.correct_answer} currentCorrect={totalCorrect} handleCorrectAnswer={handleCorrect} alreadyAnswered={hasBeenAnswered} answerQuestion={setHasBeenAnswered}/>)}
             <p style={{marginTop: "20px"}}>Total Correct: {totalCorrect}</p>
         </div>
     );

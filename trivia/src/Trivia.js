@@ -61,6 +61,7 @@ export default function Trivia() {
         <div className="trivia-intro">
             {!started && ( 
                 <div className="intro-options">
+                    <h1>Trivia!</h1>
                     <h2>Questions:</h2>
                     <QuestionsDropdown handleGetNumQuestions={GetNumQuestions}/>
                     <h2>Category:</h2>

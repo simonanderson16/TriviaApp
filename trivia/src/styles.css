@@ -41,9 +41,11 @@
 
   .trivia-intro .MuiButton-root {
     display: block;
-    margin-top: 25px;
-    margin-bottom: 75px;
+    margin-top: 50px;
+    margin-bottom: 50pxpx;
     background-color: purple;
+    width: 200px;
+    font-size: large;
   }
 
 
@@ -75,17 +77,19 @@
   .App h1 {
     color: purple;
     text-align: left;
-    margin-left: 100px;
+    margin-bottom: 30px;
   }
 
 
   .intro-options {
     border: 1px solid black;
     border-radius: 10px;
-    width: 500px;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
-    margin-top: 80px;
+    height: 50vh;
+    width: 500px;
+    margin: auto;
+    margin-top: 100px;
   }

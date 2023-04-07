@@ -7,7 +7,6 @@ import "./styles.css";
 function App() {
   return (
     <div className="App">
-      {/*<h1>Trivia!</h1>*/}
       <Trivia/>
     </div>
   );
