@@ -3,6 +3,7 @@ import QuestionsDropdown from "./QuestionsDropdown";
 import CategoryDropdown from "./CategoryDropdown";
 import Button from '@mui/material/Button';
 import Question from "./Question";
+import "./styles.css"
 
 export default function Trivia() {
     const[questions, setQuestions] = useState([]);
@@ -53,14 +54,14 @@ export default function Trivia() {
     };
 
     return(
-        <>
+        <div className="trivia-intro">
             <h2>Questions:</h2>
             <QuestionsDropdown handleGetNumQuestions={GetNumQuestions}/>
             <h2>Category:</h2>
             <CategoryDropdown handleGetCategory={GetCategory}/>
-            <Button variant="contained" onClick={() => generateQuestions(setQuestions)}>Start</Button>
+            <Button variant="contained" className="start-button" onClick={() => generateQuestions(setQuestions)}>Start</Button>
             {questions.map((info, index) => <Question key={index} question={info} number={index+1}/>)}
-        </>
+        </div>
     );
 }
 
