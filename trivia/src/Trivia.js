@@ -8,6 +8,7 @@ import "./styles.css"
 export default function Trivia() {
     
     const [totalCorrect, SetTotalCorrect] = useState(0);
+    const [started, setStarted] = useState(false);
     
     const[questions, setQuestions] = useState([]);
     console.log(questions);
@@ -58,12 +59,19 @@ export default function Trivia() {
 
     return(
         <div className="trivia-intro">
-            <h2>Questions:</h2>
-            <QuestionsDropdown handleGetNumQuestions={GetNumQuestions}/>
-            <h2>Category:</h2>
-            <CategoryDropdown handleGetCategory={GetCategory}/>
-            <Button variant="contained" className="start-button" onClick={() => generateQuestions(setQuestions)}>Start</Button>
-            {questions.map((info, index) => <Question key={index} question={info} number={index+1} totalCorrect={totalCorrect} handleCorrect={SetTotalCorrect}/>)}
+            {!started && ( 
+                <div className="intro-options">
+                    <h2>Questions:</h2>
+                    <QuestionsDropdown handleGetNumQuestions={GetNumQuestions}/>
+                    <h2>Category:</h2>
+                    <CategoryDropdown handleGetCategory={GetCategory}/>
+                    <Button variant="contained" className="start-button" onClick={() => {
+                        generateQuestions(setQuestions)
+                        setStarted(true)}
+                    }>Start</Button>
+                </div>
+            )}
+            {started && questions.map((info, index) => <Question key={index} question={info} number={index+1} totalCorrect={totalCorrect} handleCorrect={SetTotalCorrect}/>)}
         </div>
     );
 }

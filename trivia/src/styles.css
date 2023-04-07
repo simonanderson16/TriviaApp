@@ -71,3 +71,21 @@
   .incorrect {
     color: red;
   }
+
+  .App h1 {
+    color: purple;
+    text-align: left;
+    margin-left: 100px;
+  }
+
+
+  .intro-options {
+    border: 1px solid black;
+    border-radius: 10px;
+    width: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 80px;
+  }

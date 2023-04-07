@@ -7,6 +7,7 @@ export default function AnswerChoice({singleAnswer, correctAnswer, currentCorrec
     //console.log("correct answer: " + correctAnswer);
 
     const [isCorrect, setIsCorrect] = useState(null);
+    const [alreadyAnswered, setAlreadyAnswered] = useState(false);
 
     // function handleCorrect() {
     //     return currentCorrect+1;
@@ -14,17 +15,20 @@ export default function AnswerChoice({singleAnswer, correctAnswer, currentCorrec
     
     function handleAnswerSelection(answer) {
         //console.log("answer: " + answer);
-        if (answer === correctAnswer) {
-            console.log("Correct!")
-            setIsCorrect(true);
-            handleCorrectAnswer(currentCorrect+1);
-            return true;
-        }
-        else {
-            console.log("Incorrect :(")
-            setIsCorrect(false);
-            return false;
-        }
+        if (!alreadyAnswered) {
+            setAlreadyAnswered(true);
+            if (answer === correctAnswer) {
+                console.log("Correct!")
+                setIsCorrect(true);
+                handleCorrectAnswer(currentCorrect+1);
+                return true;
+            }
+            else {
+                console.log("Incorrect :(")
+                setIsCorrect(false);
+                return false;
+            }
+        }   
     }
 
 

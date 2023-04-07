@@ -7,7 +7,7 @@ export default function Question({question, number, totalCorrect, handleCorrect}
     //const [totalCorrect, SetTotalCorrect] = useState(0);
 
 
-    const getFormattedQuestionText = (string) => {
+    const getFormattedString = (string) => {
         const stringWithQuotes = string.replaceAll("&quot;", "\"");
         const stringWithApostrophes = stringWithQuotes.replaceAll("&#039;", "'");
         const stringWithAccents = stringWithApostrophes.replaceAll("&eacute;", "é");
@@ -47,10 +47,10 @@ export default function Question({question, number, totalCorrect, handleCorrect}
         <div className="whole_question">
             <h3 style={{color: "purple"}}>Question {number}</h3>
             <p>{/*JSON.stringify(question.question)*/}</p>
-            <p className="question-text" style={{fontWeight: 'bold'}}>{getFormattedQuestionText((question.question))}</p>
+            <p className="question-text" style={{fontWeight: 'bold'}}>{getFormattedString((question.question))}</p>
             {/*question.map(q => <AnswerChoice>{q.correct_answer}</AnswerChoice>)*/}
             {/*randomizeOrderOfAnswerChoices(question)*/}
-            {answerChoices.map(item => <AnswerChoice singleAnswer={item} correctAnswer={question.correct_answer} currentCorrect={totalCorrect} handleCorrectAnswer={handleCorrect}/>)}
+            {answerChoices.map(item => <AnswerChoice singleAnswer={getFormattedString(item)} correctAnswer={question.correct_answer} currentCorrect={totalCorrect} handleCorrectAnswer={handleCorrect}/>)}
             <p style={{marginTop: "20px"}}>Total Correct: {totalCorrect}</p>
         </div>
     );
