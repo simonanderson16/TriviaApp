@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import AnswerChoice from "./AnswerChoice";
 import "./styles.css"
 
-export default function Question({question, number, totalCorrect, handleCorrect}) {
+export default function Question({question, number, totalCorrect, handleCorrect, handleGuess, totalGuessed}) {
 
     //const [totalCorrect, SetTotalCorrect] = useState(0);
 
@@ -55,8 +55,8 @@ export default function Question({question, number, totalCorrect, handleCorrect}
             <p className="question-text" style={{fontWeight: 'bold'}}>{HTMLDecoder.decode(question.question)}</p>
             {/*question.map(q => <AnswerChoice>{q.correct_answer}</AnswerChoice>)*/}
             {/*randomizeOrderOfAnswerChoices(question)*/}
-            {answerChoices.map((item, index) => <AnswerChoice key={index} singleAnswer={HTMLDecoder.decode(item)} correctAnswer={question.correct_answer} currentCorrect={totalCorrect} handleCorrectAnswer={handleCorrect} alreadyAnswered={hasBeenAnswered} answerQuestion={setHasBeenAnswered}/>)}
-            <p style={{marginTop: "20px"}}>Total Correct: {totalCorrect}</p>
+            {answerChoices.map((item, index) => <AnswerChoice key={index} singleAnswer={HTMLDecoder.decode(item)} correctAnswer={question.correct_answer} currentCorrect={totalCorrect} handleCorrectAnswer={handleCorrect} alreadyAnswered={hasBeenAnswered} answerQuestion={setHasBeenAnswered} currentGuessed={totalGuessed} handleGuessAttempt={handleGuess}/>)}
+            <p style={{marginTop: "20px"}}>Total Correct: {totalCorrect}/{totalGuessed}</p>
         </div>
     );
 

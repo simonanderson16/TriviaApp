@@ -2,7 +2,7 @@ import { ToggleButton, Checkbox, Button } from "@mui/material";
 import "./styles.css";
 import { useState } from "react";
 
-export default function AnswerChoice({singleAnswer, correctAnswer, currentCorrect, handleCorrectAnswer, alreadyAnswered, answerQuestion}) {
+export default function AnswerChoice({singleAnswer, correctAnswer, currentCorrect, handleCorrectAnswer, alreadyAnswered, answerQuestion, currentGuessed, handleGuessAttempt}) {
 
     //console.log("correct answer: " + correctAnswer);
 
@@ -29,6 +29,7 @@ export default function AnswerChoice({singleAnswer, correctAnswer, currentCorrec
         //console.log("answer: " + answer);
         if (!alreadyAnswered) {
             answerQuestion(true);
+            handleGuessAttempt(currentGuessed+1);
             if (answer === HTMLDecoder.decode(correctAnswer)) {
                 console.log("Correct!")
                 setIsCorrect(true);
