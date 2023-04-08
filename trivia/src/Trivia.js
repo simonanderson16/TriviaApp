@@ -9,12 +9,13 @@ export default function Trivia() {
     
     const [totalCorrect, SetTotalCorrect] = useState(0);
     const [started, setStarted] = useState(false);
+    const [restarted, setRestarted] = useState(false);
     
     const[questions, setQuestions] = useState([]);
     console.log(questions);
-    useEffect(() => {
-        generateQuestions(setQuestions);
-    }, []);
+    // useEffect(() => {
+    //     generateQuestions(setQuestions);
+    // }, []);
 
     //==================================================
 
@@ -26,9 +27,22 @@ export default function Trivia() {
         console.log(numQuestions);
     }
 
+    function GetAdditionalQuestions(selectedNumQuestions) {
+        numQuestions = selectedNumQuestions;
+        console.log(numQuestions);
+    }
+
     function GetCategory(selectedCategory) {
         category = selectedCategory;
         console.log(category);
+    }
+
+    function reloadPage() {
+        window.location.reload();
+    }
+
+    function closePage() {
+        window.close();
     }
 
     //===================================================
@@ -72,7 +86,29 @@ export default function Trivia() {
                     }>Start</Button>
                 </div>
             )}
-            {started && questions.map((info, index) => <Question key={index} question={info} number={index+1} totalCorrect={totalCorrect} handleCorrect={SetTotalCorrect}/>)}
+            {started && !restarted &&
+            <>
+                <h1 style={{marginLeft: "50px"}}>Trivia!</h1>
+                {questions.map((info, index) => <Question key={index} question={info} number={index+1} totalCorrect={totalCorrect} handleCorrect={SetTotalCorrect}/>)}
+                <div className="more-questions-prompt">
+                    {/*<h3>How many more questions would you like?</h3>
+                    <QuestionsDropdown handleGetNumQuestions={GetAdditionalQuestions}/>
+                    <CategoryDropdown handleGetCategory={GetCategory}/>
+                    <Button id="more-questions-button" variant="contained" onClick ={() => {
+                        generateQuestions(setQuestions);
+                        setRestarted(true);
+                    }}>GO</Button>*/}
+                    <h3>Play Again?</h3>
+                    <Button variant="contained" onClick={reloadPage}>YES</Button>
+                    <Button variant="contained" onClick={closePage}>NO</Button>
+                </div>
+            </>}
+            {restarted &&
+            <>
+                <h1 style={{marginLeft: "50px"}}>Trivia!</h1>
+                {questions.map((info, index) => <Question key={index} question={info} number={index+1} totalCorrect={totalCorrect} handleCorrect={SetTotalCorrect}/>)}
+            </>
+            }
         </div>
     );
 }

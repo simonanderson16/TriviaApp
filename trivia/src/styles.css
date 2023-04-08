@@ -1,3 +1,4 @@
+
 .answer_choice {
     display: flex;
     align-items: center;
@@ -28,7 +29,7 @@
 
   .whole_question{
     text-align: left;
-    margin-left: 50px;
+    margin-left: 100px;
     margin-bottom: 50px;
   }
 
@@ -48,12 +49,24 @@
     font-size: large;
   }
 
+  #more-questions-button{
+    display: block;
+    margin-top: 50px;
+    margin-bottom: 50pxpx;
+    background-color: purple;
+    width: 100px;
+    font-size: large;
+  }
+
+  .more-questions-prompt {
+    margin-left: 50px;
+  }
+
 
   .trivia-intro {
     align-items: center;
     text-align: left;
     margin-bottom: 10px;
-    margin-left: 100px;
   }
 
   .answer-select {

@@ -6,6 +6,8 @@ export default function AnswerChoice({singleAnswer, correctAnswer, currentCorrec
 
     //console.log("correct answer: " + correctAnswer);
 
+    const HTMLDecoder = require("html-encoder-decoder");
+
     const [isCorrect, setIsCorrect] = useState(null);
     //const [alreadyAnswered, setAlreadyAnswered] = useState(false);
 
@@ -13,21 +15,21 @@ export default function AnswerChoice({singleAnswer, correctAnswer, currentCorrec
     //     return currentCorrect+1;
     // }
 
-    const getFormattedString = (string) => {
-        const stringWithQuotes = string.replaceAll("&quot;", "\"");
-        const stringWithApostrophes = stringWithQuotes.replaceAll("&#039;", "'");
-        const stringWithAccents = stringWithApostrophes.replaceAll("&eacute;", "é");
-        const stringWithPi = stringWithAccents.replaceAll("&pi;", "π");
-        const stringWithAnd =stringWithPi.replaceAll("&amp;", "&");
+    // const getFormattedString = (string) => {
+    //     const stringWithQuotes = string.replaceAll("&quot;", "\"");
+    //     const stringWithApostrophes = stringWithQuotes.replaceAll("&#039;", "'");
+    //     const stringWithAccents = stringWithApostrophes.replaceAll("&eacute;", "é");
+    //     const stringWithPi = stringWithAccents.replaceAll("&pi;", "π");
+    //     const stringWithAnd =stringWithPi.replaceAll("&amp;", "&");
 
-        return stringWithAnd;
-    }
+    //     return stringWithAnd;
+    // }
     
     function handleAnswerSelection(answer) {
         //console.log("answer: " + answer);
         if (!alreadyAnswered) {
             answerQuestion(true);
-            if (answer === getFormattedString(correctAnswer)) {
+            if (answer === HTMLDecoder.decode(correctAnswer)) {
                 console.log("Correct!")
                 setIsCorrect(true);
                 handleCorrectAnswer(currentCorrect+1);
