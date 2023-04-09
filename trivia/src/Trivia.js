@@ -10,14 +10,11 @@ export default function Trivia() {
     const [totalCorrect, SetTotalCorrect] = useState(0);
     const [totalAnswered, setTotalAnswered] = useState(0);
     const [started, setStarted] = useState(false);
-    const [restarted, setRestarted] = useState(false);
     const [gameOver, setGameOver] = useState(false);
+    const [hasBeenError, setHasBeenError] = useState(false);
     
     const[questions, setQuestions] = useState([]);
     console.log(questions);
-    // useEffect(() => {
-    //     generateQuestions(setQuestions);
-    // }, []);
 
     //==================================================
 
@@ -25,11 +22,6 @@ export default function Trivia() {
     let category;
 
     function GetNumQuestions(selectedNumQuestions) {
-        numQuestions = selectedNumQuestions;
-        console.log(numQuestions);
-    }
-
-    function GetAdditionalQuestions(selectedNumQuestions) {
         numQuestions = selectedNumQuestions;
         console.log(numQuestions);
     }
@@ -59,11 +51,7 @@ export default function Trivia() {
         } else {
             url = url + "amount=" + numQuestions;
         }
-        // else, add "amount=__" where __ is the value from the QuestionsDropdown
-        //url = url + "amount=1";
-    
-        // if category is Any category, continue
-        // else, add "&category=__" where __ is the value from the CategoryDropdown
+
         if(category !== "") {
             url = url + "&category=" + category;
         }
@@ -72,7 +60,10 @@ export default function Trivia() {
     
         fetch(url)
             .then((res) => res.json())
-            .then((data) => setData(data.results));
+            .then((data) => setData(data.results))
+            .catch((error) => {
+                //setQuestions([]);
+                setHasBeenError(true)});
     };
 
     return(
@@ -90,7 +81,8 @@ export default function Trivia() {
                     }>Start</Button>
                 </div>
             )}
-            {started && !gameOver &&
+            {hasBeenError && <h1>Error Fetching Questions</h1>}
+            {started && !gameOver && !hasBeenError &&
             <>
                 <h1 style={{marginLeft: "50px"}}>Trivia!</h1>
                 {questions.map((info, index) => <Question key={index} question={info} number={index+1} totalCorrect={totalCorrect} handleCorrect={SetTotalCorrect} totalGuessed={totalAnswered} handleGuess={setTotalAnswered}/>)}
@@ -116,22 +108,5 @@ export default function Trivia() {
             {gameOver && 
             <h1 className="game-over-text">Thanks for Playing!</h1>}
         </div>
-    );
-
-
-    
+    );   
 }
-
-// const generateQuestions = (setData) => {
-//     let url = "https://opentdb.com/api.php?";
-//     // if amount is 0, stop program
-//     // else, add "amount=__" where __ is the value from the QuestionsDropdown
-//     url = url + "amount=1";
-
-//     // if category is Any category, continue
-//     // else, add "&category=__" where __ is the value from the CategoryDropdown
-
-//     fetch(url)
-//         .then((res) => res.json())
-//         .then((data) => setData(data.results));
-// };
