@@ -85,6 +85,7 @@
   
   .incorrect {
     color: red;
+    font-weight: bolder;
   }
 
   .App h1 {
@@ -105,4 +106,28 @@
     width: 500px;
     margin: auto;
     margin-top: 100px;
+  }
+
+  .game-over-text {
+    font-size: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+    border: 1px solid black;
+    border-radius: 10px;
+    width: 800px;
+    margin: auto;
+    margin-top: 100px;
+  }
+
+  .end-buttons {
+    display: flex;
+    justify-content: left;
+  }
+
+  .end-buttons .MuiButton-root{
+    margin-top: 0px;
+    margin-right: 50px;
   }

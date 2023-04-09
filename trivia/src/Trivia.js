@@ -11,6 +11,7 @@ export default function Trivia() {
     const [totalAnswered, setTotalAnswered] = useState(0);
     const [started, setStarted] = useState(false);
     const [restarted, setRestarted] = useState(false);
+    const [gameOver, setGameOver] = useState(false);
     
     const[questions, setQuestions] = useState([]);
     console.log(questions);
@@ -42,9 +43,11 @@ export default function Trivia() {
         window.location.reload();
     }
 
-    function closePage() {
-        window.close();
+    function scrollDown() {
+        setTimeout(() => window.scrollTo(0, document.body.scrollHeight));
+        //window.scrollTo(0, document.body.scrollHeight);
     }
+
 
     //===================================================
 
@@ -87,7 +90,7 @@ export default function Trivia() {
                     }>Start</Button>
                 </div>
             )}
-            {started && 
+            {started && !gameOver &&
             <>
                 <h1 style={{marginLeft: "50px"}}>Trivia!</h1>
                 {questions.map((info, index) => <Question key={index} question={info} number={index+1} totalCorrect={totalCorrect} handleCorrect={SetTotalCorrect} totalGuessed={totalAnswered} handleGuess={setTotalAnswered}/>)}
@@ -102,12 +105,16 @@ export default function Trivia() {
                     }}>GO</Button>*/}
                     <h2>Final Score: {totalCorrect}/{totalAnswered}</h2>
                     <h3>Play Again?</h3>
+                    <div className="end-buttons">
                     <Button variant="contained" onClick={reloadPage}>YES</Button>
-                    <Button variant="contained" onClick={closePage}>NO</Button>
-                    {window.scrollTo(0, document.body.scrollHeight)}
+                    <Button variant="contained" onClick={() => setGameOver(true)}>NO</Button>
+                    {scrollDown()}
+                    </div>
                 </div>
                 }
             </>}
+            {gameOver && 
+            <h1 className="game-over-text">Thanks for Playing!</h1>}
         </div>
     );
 
